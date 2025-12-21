@@ -26,26 +26,26 @@
 
 <!-- Main CSS -->
 <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet">
+<link href="{{ asset('assets/css/UKM.css') }}" rel="stylesheet">
 <link href="../css/main.css" rel="stylesheet">
 
-</head>
-
-<body class="index-page">
-
-  <header id="header" class="header d-flex align-items-center fixed-top">
+<header id="header" class="header d-flex align-items-center fixed-top">
     <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
       <a href="index.html" class="logo d-flex align-items-center">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="assets/img/logo.webp" alt=""> -->
         <h1 class="sitename">UKM</h1>
+                <div class="nav-right">
+    <span id="userPoints" class="points-box">Points: 0</span>
+  </div>
       </a>
 
       <nav id="navmenu" class="navmenu">
         <ul>
           <li><a href="/index" class="active">Home</a></li>
           <li><a href="#about">About</a></li>
-          <li><a href="/ukm">UKM</a></li>
+          <li><a href="/UKM">UKM</a></li>
           <li><a href="#Logout">Logout</a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
@@ -54,90 +54,113 @@
     </div>
   </header>
 
-  <main class="main">
+</head>
 
-    <!-- Hero Section -->
-    <section id="hero" class="hero section light-background">
+<section id="pilih-ukm" class="py-5" style="margin-top: 120px;">
+  <div class="container" data-aos="fade-up">
+    <div class="section-header text-center mb-5">
+      <h2>Pilih UKM Kamu</h2>
+      <p>Setiap UKM memiliki nilai poin tertentu. Pilih sesuai minatmu!</p>
+    </div>
 
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
+    <div class="container my-5">
+    <div class="row g-4">
 
-        <div class="row align-items-center">
-          <div class="col-lg-6">
-            <div class="hero-content">
-              <h1 data-aos="fade-up" data-aos-delay="200">Search your passion with us</h1>
-              <p data-aos="fade-up" data-aos-delay="300">Dengan adanya Aplikasi ini maka dapat mempermudah kalian dalam pencarian UKM
-                yang kalian minati
-              </p>
-              <div class="hero-cta" data-aos="fade-up" data-aos-delay="400">
-                <a href="#about" class="btn-primary">Mulai sekarang</a>
-              </div>
-              <div class="hero-stats" data-aos="fade-up" data-aos-delay="500">
-                <div class="stat-item">
-                  <div class="stat-number">500+</div>
-                  <div class="stat-label">UKM Berhasil</div>
+        <!-- Card 1 -->
+        <div class="col-md-6">
+            <div class="ukm-card">
+                <img src="{{ asset('assets/img/services/Basket.webp') }}" alt="UKM">
+                <div>
+                    <h5>UKM Basket</h5>
+                    <p class="ukm-desc">Wadah bagi mahasiswa yang ingin mengasah kemampuan bermain basket, meningkatkan fisik, dan mengikuti kompetisi antar kampus.</p>
+                    <p>Poin: <strong>30</strong></p>
+                    <button class="ukm-btn" onclick="pilihUKM('UKM Basket')">Pilih UKM</button>
                 </div>
-                <div class="stat-item">
-                  <div class="stat-number">98%</div>
-                  <div class="stat-label">Kepuasan Pengguna</div>
-                </div>
-                <div class="stat-item">
-                  <div class="stat-number">10+</div>
-                  <div class="stat-label">Years Experience</div>
-                </div>
-              </div>
             </div>
-          </div>
-
-          <div class="col-lg-6">
-            <div class="hero-image" data-aos="fade-left" data-aos-delay="300">
-              <img src="assets/img/about/about-square-10.webp" alt="Business Success" height="700px" width="700px" class="img-fluid">
-              <div class="floating-card" data-aos="zoom-in" data-aos-delay="600">
-                <div class="card-icon">
-                  <i class="bi bi-graph-up-arrow"></i>
-                </div>
-                <div class="card-content">
-                  <h5>Revenue Growth</h5>
-                  <div class="growth-percentage">+45%</div>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
 
-      </div>
+        <!-- Card 2 -->
+        <div class="col-md-6">
+            <div class="ukm-card">
+                <img src="{{ asset('assets/img/services/Voli.webp') }}" alt="UKM">
+                <div>
+                    <h5>UKM Voli</h5>
+                    <p class="ukm-desc">Tempat latihan dan pembinaan bagi pecinta bola voli, fokus pada teamwork, teknik dasar, dan turnamen internal maupun eksternal.</p>
+                    <p>Poin: <strong>25</strong></p>
+                    <button class="ukm-btn" onclick="pilihUKM('UKM Voli')">Pilih UKM</button>
+                </div>
+            </div>
+        </div>
 
-    </section><!-- /Hero Section -->
+        <!-- Card 3 -->
+        <div class="col-md-6">
+            <div class="ukm-card">
+                <img src="{{ asset('assets/img/services/Sepak_bola.webp') }}" alt="UKM">
+                <div>
+                    <h5>UKM Sepak Bola</h5>
+                    <p class="ukm-desc">Komunitas sepak bola aktif yang rutin latihan, mengembangkan skill individu, serta berpartisipasi dalam pertandingan antar universitas.</p>
+                    <p>Poin: <strong>35</strong></p>
+                    <button class="ukm-btn" onclick="pilihUKM('UKM Sepak Bola')">Pilih UKM</button>
+                </div>
+            </div>
+        </div>
 
-    <!-- About Section -->
-    <section id="about" class="about section">
+        <!-- Card 4 -->
+        <div class="col-md-6">
+            <div class="ukm-card">
+                <img src="{{ asset('assets/img/services/Taekwondo.webp') }}" alt="UKM">
+                <div>
+                    <h5>UKM Taekwondo</h5>
+                    <p class="ukm-desc">UKM bela diri untuk meningkatkan disiplin, kekuatan mental, dan teknik bertarung, bimbingan oleh pelatih tersertifikasi.</p>
+                    <p>Poin: <strong>28</strong></p>
+                    <button class="ukm-btn" onclick="pilihUKM('UKM Taekwondo')">Pilih UKM</button>
+                </div>
+            </div>
+        </div>
 
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <span class="subtitle">About</span>
-        <h2>About Us</h2>
-        <p>Kami akan mencari bakat yang sesuai untuk kalian.</p>
-      </div><!-- End Section Title -->
+        <!-- Card 5 -->
+        <div class="col-md-6">
+            <div class="ukm-card">
+                <img src="{{ asset('assets/img/services/Seni_tari.webp') }}" alt="UKM">
+                <div>
+                    <h5>UKM Seni Tari</h5>
+                    <p class="ukm-desc">Tempat bagi mahasiswa yang memiliki minat di dunia tari tradisional maupun modern untuk berkarya dan tampil dalam berbagai event.</p>
+                    <p>Poin: <strong>20</strong></p>
+                    <button class="ukm-btn" onclick="pilihUKM('UKM Seni Tari')">Pilih UKM</button>
+                </div>
+            </div>
+        </div>
 
-    </section><!-- /About Section -->
+        <!-- Card 6 -->
+        <div class="col-md-6">
+            <div class="ukm-card">
+                <img src="{{ asset('assets/img/services/Musik.webp') }}" alt="UKM">
+                <div>
+                    <h5>UKM Musik</h5>
+                    <p class="ukm-desc">Komunitas untuk musisi kampus yang ingin belajar, berlatih, kolaborasi, hingga tampil dalam panggung pentas musik kampus.</p>
+                    <p>Poin: <strong>22</strong></p>
+                    <button class="ukm-btn" onclick="pilihUKM('UKM Musik')">Pilih UKM</button>
+                </div>
+            </div>
+        </div>
 
-    <!-- Services Section -->
-    <section id="services" class="services section">
+    </div>
+</div>
 
-  <footer id="footer" class="footer dark-background">
+</section>
+
+<script>
+  function pilihUKM(nama, poin) {
+    document.getElementById("hasilPilihan").textContent =
+      "Kamu memilih UKM " + nama + " dengan poin " + poin;
+  }
+</script>
+
+
+            <footer id="footer" class="footer dark-background">
 
     <div class="container footer-top">
       <div class="row gy-4">
-        <div class="col-lg-5 col-md-12 footer-about">
-          <a href="index.html" class="logo d-flex align-items-center">
-            <span class="sitename">UKM</span>
-          </a>
-          <div class="social-links d-flex mt-4">
-            <a href=""><i class="bi bi-twitter-x"></i></a>
-            <a href=""><i class="bi bi-facebook"></i></a>
-            <a href=""><i class="bi bi-instagram"></i></a>
-            <a href=""><i class="bi bi-linkedin"></i></a>
-          </div>
-        </div>
 
         <div class="col-lg-2 col-6 footer-links">
           <h4>Useful Links</h4>
@@ -208,3 +231,4 @@
 </body>
 
 </html>
+
