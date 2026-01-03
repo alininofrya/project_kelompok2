@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role', // Penting untuk membedakan Admin & Pengurus
     ];
 
     /**
@@ -44,5 +45,14 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    /**
+     * RELASI: User punya satu data Member
+     * Ini yang dibutuhkan supaya auth()->user()->member->ukm_id bisa jalan.
+     */
+    public function member()
+    {
+        return $this->hasOne(Member::class, 'user_id');
     }
 }

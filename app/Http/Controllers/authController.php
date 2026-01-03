@@ -2,83 +2,57 @@
 
 namespace App\Http\Controllers;
 
-use Hash;
 use Illuminate\Http\Request;
-use App\Models\Mahasiswa;
+use Illuminate\Support\Facades\Auth;
 
-
-class authController extends Controller
+class AuthController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    // Menampilkan halaman login
+    public function showLogin()
     {
-        //
+        return view('auth.login');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        // $request->validate([
-        //     'email' => 'required|email|unique:mahasiswa',
-        //     'password' => 'required|min:10'
-        // ]);
-
-        // $mahasiswa = new Mahasiswa();
-        // $mahasiswa->email = $request->email;
-        // $mahasiswa->password = Hash::make($request->password);
-        // $mahasiswa->save();
-
-        dd($request->all());
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
+    // Proses login manual
     public function login(Request $request)
     {
-        dd($request->all());
+        // Validasi input
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
 
-        $username = $request->input('email');
-        $password = $request->input('password');
+        // Cek email dan password di database
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+
+            // Ambil role user yang login
+            $role = Auth::user()->role;
+
+            // Redirect otomatis berdasarkan role
+            if ($role === 'admin') {
+                return redirect()->intended('/admin/dashboard');
+            } elseif ($role === 'pengurus') {
+                return redirect()->intended('/pengurus/dashboard');
+            } else {
+                // UBAH DARI /mahasiswa/home MENJADI /mahasiswa/dashboard
+                // Ini disesuaikan dengan ->name('mahasiswa.dashboard') di web.php
+                return redirect()->intended('/mahasiswa/dashboard');
+            }
+        }
+
+        // Jika gagal, kembali ke login dengan pesan error
+        return back()->withErrors([
+            'email' => 'Email atau password yang kamu masukkan salah.',
+        ])->onlyInput('email');
+    }
+
+    // Proses logout
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/');
     }
 }

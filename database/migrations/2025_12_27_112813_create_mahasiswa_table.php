@@ -19,9 +19,10 @@ return new class extends Migration
             $table->string('first_name', 100);
             $table->string('last_name',100);
             $table->date('birthday')->nullable();
+            $table->string('gender');
             $table->enum('prodi',['TI','SI','TRK','TET','Akuntansi','TM','TL','TRM','TE','TRJT']);
             $table->string('email')->unique();
-            $table->string('password')->unique();
+            $table->string('password');
             $table->timestamps();
         });
     }
