@@ -22,7 +22,7 @@ class PengurusController extends Controller
         if (!$member) {
             return redirect('/')->with('error', 'Akun Anda tidak terdaftar sebagai Pengurus UKM.');
         }
-
+//
         $ukm = Ukm::find($member->ukm_id);
 
         // Cek jika UKM nya tidak ditemukan (misal terhapus)
@@ -55,24 +55,19 @@ public function anggotaIndex(Request $request)
 
     $ukm = Ukm::find($member->ukm_id);
 
-    // --- LOGIKA PENCARIAN & PAGINATION ---
     $query = Member::where('ukm_id', $ukm->id)->with('user');
 
-    // Jika ada input pencarian
     if ($request->has('search')) {
         $search = $request->search;
         $query->whereHas('user', function($q) use ($search) {
             $q->where('name', 'LIKE', "%{$search}%")
               ->orWhere('email', 'LIKE', "%{$search}%");
         })->orWhere('jabatan', 'LIKE', "%{$search}%")
-          ->where('ukm_id', $ukm->id); // Pastikan tetap di UKM yang sama
+          ->where('ukm_id', $ukm->id);
     }
 
-    // Ambil data dengan pagination (10 data per halaman)
-    // append(['search' => ...]) berguna agar saat pindah halaman, pencarian tidak hilang
     $anggota = $query->paginate(10)->appends(['search' => $request->search]);
 
-    // Ambil user untuk modal tambah (tetap sama)
     $users = User::where('role', 'mahasiswa')
         ->whereDoesntHave('member', function ($query) use ($ukm) {
             $query->where('ukm_id', $ukm->id);
